@@ -9,6 +9,15 @@ const options           = { 'port'     : config.mqtt.port,
                             'qos'      : 0 };
 exports.mqtt            = mqtt.connect(config.mqtt.broker, options);
 
+const mqtt_sub              = require('mqtt');
+const options_sub           = { 'port'     : "1883",
+                            'host'     : "mqtt://rmq-fsc.eastasia.cloudapp.azure.com" ,
+                            'username' : "admin", 
+                            'password' : "good4admin",
+                            'qos'      : 0 };
+exports.mqttsub            = mqtt_sub.connect("mqtt://rmq-fsc.eastasia.cloudapp.azure.com", options_sub);
+
+
 // MQTT initial
 if (config.service.mqtt.toString() === 'true') { require('./init/mqtt'); }
 

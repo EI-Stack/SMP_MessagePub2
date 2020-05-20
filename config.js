@@ -28,11 +28,11 @@ if(!_.isUndefined(process.env.VCAP_SERVICES)){
 	config.restful.order    		= process.env.restful_order;		// The default of amount.	
 } else {	
 	config.version  		  		= "1.0.0"; 	 // Vesion
-	config.topic  		  			= "III/11D0C9FC9F92/sensor"; 	 // Topic  //data
-	config.port						= 8080;		 // PORT
+	config.topic  		  			= "mirdc/metering/data"; 	 // Topic  //data
+	config.port						= 8088;		 // PORT
 	config.service.mqtt		  		= true;		 // MQTT Service
 	config.service.influxdb	  		= true;		 // Influxdb Service
-	config.service.mongodb	  		= true; 	 // MongoDB Service	
+	config.service.mongodb	  		= false; 	 // MongoDB Service	
 	config.service.postgres	  		= false;	 // Postgres Service
 	config.service.redis	  		= false;	 // Redis Service
 	// RESTFUL APIs
@@ -58,14 +58,18 @@ if (config.service.mqtt.toString() === 'true') {
 		config.schema.refs		  = process.env.schema_refs;
 	} else {
 		// config.mqtt.broker	  	  = "http://192.168.50.187";	// MQTT Broker IP
-		config.mqtt.broker	  	  = "http://wise-msghub.eastasia.cloudapp.azure.com";	// MQTT Broker IP
+		config.mqtt.broker	  	  = "mqtt://rabbitmq-001-pub.sa.wise-paas.com";	//"http://wise-msghub.eastasia.cloudapp.azure.com" for 187 MQTT Broker IP "http://124.9.14.79"  for cf-lab and mirdc 
 		config.mqtt.port		  = 1883;			  							// MQTT Broker Port (Default:1883) 
 		// config.mqtt.username	  = "user";
 		// config.mqtt.password	  = "good4user";
-		config.mqtt.username	  = "cb0d845e-07d1-4736-909d-51b59e0bff1d:4ee69351-71af-4fa5-a137-bbb302df2319";
-		config.mqtt.password	  = "prlc9IQMzcTIVrlUqglLXgGJC";
-		// config.mqtt.username	  = "cb0d845e-07d1-4736-909d-51b59e0bff1d:45cb896d-9c0a-4002-97f0-ccc504b834a7";
-		// config.mqtt.password	  = "GBcaIkvyBqjhj2NF7WzMl6smO";
+		config.mqtt.username	  = "8cf044e2-5ed3-11ea-b206-d20b7873c901:8adb1174-5ee1-11ea-b1de-d20dfb084846";
+		config.mqtt.password	  = "PFKo8vEnXin5wsdttBHEHSHZD";
+		//                       username for Mirdc MQTT 2e03cf86-ad47-4c29-bf52-160b5a073f2d:d9182d97-2d83-4d38-bd5f-075e95e8d52d
+		//                       password for Mirdc MQTT sukfFUFEgTAXkfW5Ci50Rtocr
+		//             III測試用, username for iii cf lab 3f3de3b6-493a-4e5a-a956-015c81aeaaa2:22116534-b4e5-4c97-86f6-34b74728759a
+		//             III測試用, password for iii cf lab FdsTy87YDr95fYSWpLODD4CNY
+		// config.mqtt.username	  = "cb0d845e-07d1-4736-909d-51b59e0bff1d:23bbc7b8-8941-4279-8cb6-61d7d97a65da";
+		// config.mqtt.password	  = "RO0Mo52PdPLXIsCDioGhom74a";
 		config.mqtt.retain 		  = true;
 		config.schema.meta		  = "json-schema-draft-04.json";
 		config.schema.refs		  = "http://json-schema.org/draft-04/schema";
@@ -98,11 +102,11 @@ if (config.service.influxdb.toString() === 'true') {
 			config.influxdb.db        = process.env.influxdb_db;
 		}
 	} else {
-		config.influxdb.ip        = "3.0.61.62";	// 60.251.156.213
+		config.influxdb.ip        = "13.76.230.96";	// 60.251.156.213
 		config.influxdb.port      = 8086;
-		config.influxdb.username  = "test";
-		config.influxdb.password  = "good4test";
-		config.influxdb.db        = "test";
+		config.influxdb.username  = "bc52e306-d3f7-4571-994a-4a4dd8065fc4";
+		config.influxdb.password  = "2SIgkRQYCNJH9DdEbx6pJ6w10";
+		config.influxdb.db        = "mirdc";
 	}
 	console.log("[config.influxdb.ip]:"		 	+ config.influxdb.ip);
 	console.log("[config.influxdb.port]:"       + config.influxdb.port);
