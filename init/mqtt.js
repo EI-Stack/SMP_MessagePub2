@@ -242,18 +242,18 @@ mqtt.on("connect", function () {
     //     //         '"W4010-28A9_Fz1Temp" : ' + (Math.random()*100).toFixed(2) +
     //     //         '}}, "ts":"2019-04-13T00:19:19+08:00"}';
     // }, duration);
-    mqtt.subscribe(topic);
-    function publish(topic, msg, options){
-        if (mqtt.connected && count<=100000){
-            mqtt.publish(topic, msg, options, function(err){
-                if (!err) {
-                    console.log(count ++);
-                } else {
-                    console.error(count ++);
-                }
-            });
-        }
-    };    
+    // mqtt.subscribe(topic);
+    // function publish(topic, msg, options){
+    //     if (mqtt.connected && count<=100000){
+    //         mqtt.publish(topic, msg, options, function(err){
+    //             if (!err) {
+    //                 console.log(count ++);
+    //             } else {
+    //                 console.error(count ++);
+    //             }
+    //         });
+    //     }
+    // };    
 });
 
 mqtt.on("message", function (topic, data) {
