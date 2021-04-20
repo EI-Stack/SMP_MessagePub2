@@ -1,9 +1,9 @@
 "use strict";
-const config = require('../config');                         // Load the config
+const config = require('../config');                        // Load the config
 const async = require('async');                             // Async Library
-const express = require('express');                           // Express
-const router = express.Router();
-const _ = require('underscore');                        // Underscore Library
+const express = require('express');                         // Express
+const router = express.Router();                            //
+const _ = require('underscore');                            // Underscore Library
 const app = require('../app');
 const jwt_decode = require('jwt-decode');
 const mqtt = app.mqtt;
@@ -13,10 +13,15 @@ var countMirdc = 0;
 let countBySub = 0;
 mqttsub.on("connect", function () {
     console.log("[MQTTSUB]:", "Connected.");
-    mqttsub.subscribe("mirdcfics/sso")
+    // mqtt.subscribe(config.topic, { qos: 0 }, function (err, granted) {
+    //     // if (!err) {
+    //     //     console.log(granted[0].topic, granted[0].qos);
+    //     // }
+
+
+    // });
 });
 mqttsub.on("message", function (topic, msg) {
-
     var messagesubJSON = JSON.parse(msg.toString());
     var token = messagesubJSON.ssotoken.EIToken;
     var decoded = jwt_decode(token);
@@ -112,8 +117,7 @@ mqtt.on("connect", function () {
     let options = {
         qos: 0
     };
-    let duration = 1000;
-
+    let duration = 2000;
     let timer_id = setInterval(function () {
 
         var randomVar = Math.floor(Math.random() * 5);
@@ -121,94 +125,196 @@ mqtt.on("connect", function () {
         //flag ==1 means that payload will send (key)(value) "SSOToken":"ey...."
         var flag = 0;
         if (flag == 0) {
-            let BaseData = '{"userId":"f6e98537-18b7-4c7b-8581-812dc48c5c80"';
-            var randomVarUsername = Math.floor(Math.random() * 6);
+            // let BaseData = "";
+            // var randomVarUsername = Math.floor(Math.random() * 6);
+            // if (randomVarUsername == 0) {
+            //     BaseData = BaseData + '{"userId":"f6e98537-18b7-4c7b-8581-111111111111"';
+            //     BaseData = BaseData + ',"username":"smp-test-1@iii.org.tw"';
+            // } else if (randomVarUsername == 1) {
+            //     BaseData = BaseData + '{"userId":"f6e98537-18b7-4c7b-8581-222222222222"';
+            //     BaseData = BaseData + ',"username":"smp-test-2@iii.org.tw"';
+            // } else if (randomVarUsername == 2) {
+            //     BaseData = BaseData + '{"userId":"f6e98537-18b7-4c7b-8581-333333333333"';
+            //     BaseData = BaseData + ',"username":"smp-test-3@iii.org.tw"';
+            // } else if (randomVarUsername == 3) {
+            //     BaseData = BaseData + '{"userId":"f6e98537-18b7-4c7b-8581-444444444444"';
+            //     BaseData = BaseData + ',"username":"smp-test-4@iii.org.tw"';
+            // } else if (randomVarUsername == 4) {
+            //     BaseData = BaseData + '{"userId":"f6e98537-18b7-4c7b-8581-555555555555"';
+            //     BaseData = BaseData + ',"username":"smp-test-5@iii.org.tw"';
+            // } else if (randomVarUsername == 5) {
+            //     BaseData = BaseData + '{"userId":"f6e98537-18b7-4c7b-8581-666666666666"';
+            //     BaseData = BaseData + ',"username":"smp-test-6@iii.org.tw"';
+            // }
+            // var randomVarDeviceName = Math.floor(Math.random() * 6);
+            // if (randomVarDeviceName == 0) {
+            //     BaseData = BaseData +
+            //         ',"deviceName":"device1"' +
+            //         ',"deviceId":"1"';
+            // } else if (randomVarDeviceName == 1) {
+            //     BaseData = BaseData +
+            //         ',"deviceName":"device2"' +
+            //         ',"deviceId":"2"';
+            // } else if (randomVarDeviceName == 2) {
+            //     BaseData = BaseData +
+            //         ',"deviceName":"device3"' +
+            //         ',"deviceId":"3"';
+            // } else if (randomVarDeviceName == 3) {
+            //     BaseData = BaseData +
+            //         ',"deviceName":"device4"' +
+            //         ',"deviceId":"4"';
+            // } else if (randomVarDeviceName == 4) {
+            //     BaseData = BaseData +
+            //         ',"deviceName":"device5"' +
+            //         ',"deviceId":"5"';
+            // } else if (randomVarDeviceName == 5) {
+            //     BaseData = BaseData +
+            //         ',"deviceName":"device6"' +
+            //         ',"deviceId":"6"';
+            // }
+            // var randomVarAppName = Math.floor(Math.random() * 8);
+            // let SubscriptionData = "";
+            // let CountData = "";
+            // let AccumulationTimeData = "";
+            // switch (randomVarAppName) {
+            //     case 0:
+            //         BaseData = BaseData + ',"AppName":"Collision Detection Software"';
+            //         BaseData = BaseData + ',"AppId":"1679091c5a880faf6fb5e6087eb1b2dc"';
+            //         SubscriptionData = BaseData + ',"Type":"subscription"';
+            //         var randomYear = Math.floor(Math.random() * 4) + 2019;
+            //         var randomMonth = Math.floor(Math.random() * 12) + 1;
+            //         SubscriptionData = SubscriptionData + ',"year":"' + randomYear + '"';
+            //         SubscriptionData = SubscriptionData + ',"month":"' + randomMonth + '"}';
+            //         publish(topic, SubscriptionData, options);
+            //         break;
+            //     case 1:
+            //         BaseData = BaseData + ',"AppName":"iCAM"';
+            //         BaseData = BaseData + ',"AppId":"8f14e45fceea167a5a36dedd4bea2543"';
+            //         CountData = BaseData + ',"Type":"count"' + ',"CountName":"APInumber"';
+            //         var randomVar = Math.floor(Math.random() * 5) + 1;
+            //         CountData = CountData + ',"Count":"' + randomVar + '"}';
+            //         publish(topic, CountData, options);
+            //         break;
+            //     case 2:
+            //         BaseData = BaseData + ',"AppName":"Singal Acquisition"';
+            //         BaseData = BaseData + ',"AppId":"c9f0f895fb98ab9159f51fd0297e236d"';
+            //         AccumulationTimeData = BaseData +
+            //             ',"Type":"time"';
+            //         var randomVar = (Math.floor(Math.random() * 5)) * 3600;
+            //         AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
+            //         publish(topic, AccumulationTimeData, options);
+            //         break;
+            //     case 3:
+            //         BaseData = BaseData + ',"AppName":"Automated Data Collection"';
+            //         BaseData = BaseData + ',"AppId":"45c48cce2e2d7fbdea1afc51c7c6ad26"';
+            //         SubscriptionData = BaseData + ',"Type":"subscription"';
+            //         var randomYear = Math.floor(Math.random() * 4) + 2019;
+            //         var randomMonth = Math.floor(Math.random() * 12) + 1;
+            //         SubscriptionData = SubscriptionData + ',"year":"' + randomYear + '"';
+            //         SubscriptionData = SubscriptionData + ',"month":"' + randomMonth + '"}';
+            //         publish(topic, SubscriptionData, options);
+            //         break;
+            //     case 4:
+            //         BaseData = BaseData + ',"AppName":"Suppress Warpage Optimization"';
+            //         BaseData = BaseData + ',"AppId":"d3d9446802a44259755d38e6d163e820"';
+            //         CountData = BaseData +
+            //             ',"Type":"count"' +
+            //             ',"CountName":"APInumber"';
+            //         var randomVar = Math.floor(Math.random() * 5) + 1;
+            //         CountData = CountData + ',"Count":"' + randomVar + '"}';
+            //         publish(topic, CountData, options);
+            //         break;
+            //     case 5:
+            //         BaseData = BaseData + ',"AppName":"OPCUA"';
+            //         BaseData = BaseData + ',"AppId":"6512bd43d9caa6e02c990b0a82652dca"';
+            //         AccumulationTimeData = BaseData +
+            //             ',"Type":"time"';
+            //         var randomVar = (Math.floor(Math.random() * 5)) * 3600;
+            //         AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
+            //         publish(topic, AccumulationTimeData, options);
+            //         break;
+            //     case 6:
+            //         BaseData = BaseData + ',"AppName":"ADS"';
+            //         BaseData = BaseData + ',"AppId":"c20ad4d76fe97759aa27a0c99bff6710"';
+            //         SubscriptionData = BaseData + ',"Type":"subscription"';
+            //         var randomYear = Math.floor(Math.random() * 4) + 2019;
+            //         var randomMonth = Math.floor(Math.random() * 12) + 1;
+            //         SubscriptionData = SubscriptionData + ',"year":"' + randomYear + '"';
+            //         SubscriptionData = SubscriptionData + ',"month":"' + randomMonth + '"}';
+            //         publish(topic, SubscriptionData, options);
+            //         break;
+            //     case 7:
+            //         BaseData = BaseData + ',"AppName":"Milling Path Analysis"';
+            //         BaseData = BaseData + ',"AppId":"c51ce410c124a10e0db5e4b97fc2af39"';
+            //         CountData = BaseData +
+            //             ',"Type":"count"' +
+            //             ',"CountName":"APInumber"';
+            //         var randomVar = Math.floor(Math.random() * 5) + 1;
+            //         CountData = CountData + ',"Count":"' + randomVar + '"}';
+            //         publish(topic, CountData, options);
+            //         break;
+            // }
+
+            //#################################################
+            let BaseData = "";
+            var randomVarUsername = Math.floor(Math.random() * 2);
             if (randomVarUsername == 0) {
-                BaseData = BaseData + ',"username":"ei-paas@iii.org.tw"' +
-                    ',"firstName":"John"' +
-                    ',"lastName":"Cena"' +
-                    ',"country":"TW"' +
-                    ',"role":"tenant"' +
-                    ',"deviceName":"device0"' +
-                    ',"deviceId":"0"';
+                BaseData = BaseData + '{"userId":"imtc.d300@hotmail.com"';
+                BaseData = BaseData + ',"username":"imtc.d300"';
             } else if (randomVarUsername == 1) {
-                BaseData = BaseData + ',"username":"eipaasssoroot@iii.org.tw"' +
-                    ',"firstName":"John"' +
-                    ',"lastName":"Cena"' +
-                    ',"country":"TW"' +
-                    ',"role":"tenant"' +
-                    ',"deviceName":"device1"' +
-                    ',"deviceId":"1';
+                BaseData = BaseData + '{"userId":"cathy.chen@itri.org.tw"';
+                BaseData = BaseData + ',"username":"Cathy"';
             } else if (randomVarUsername == 2) {
-                BaseData = BaseData + ',"username":"holi@iii.org.tw"' +
-                    ',"firstName":"ho"' +
-                    ',"lastName":"li"' +
-                    ',"country":"TW"' +
-                    ',"role":"srpuser"' +
-                    ',"deviceName":"device2"' +
-                    ',"deviceId":"2"';
-            } else if (randomVarUsername == 3) {
-                BaseData = BaseData + ',"username":"holisun@iii.org.tw"' +
-                    ',"firstName":"holi"' +
-                    ',"lastName":"sun"' +
-                    ',"country":"TW"' +
-                    ',"role":"srpuser"' +
-                    ',"deviceName":"device3"' +
-                    ',"deviceId":"3"';
-            } else if (randomVarUsername == 4) {
-                BaseData = BaseData + ',"username":"stevenliao@iii.org.tw"' +
-                    ',"firstName":"liao"' +
-                    ',"lastName":"steven"' +
-                    ',"country":"TW"' +
-                    ',"role":"srpuser"' +
-                    ',"deviceName":"device4"' +
-                    ',"deviceId":"4"';
-            } else if (randomVarUsername == 5) {
-                BaseData = BaseData + ',"username":"eipaasssoroot@gmail.com"' +
-                    ',"firstName":"John"' +
-                    ',"lastName":"Cena"' +
-                    ',"country":"TW"' +
-                    ',"role":"tenant"' +
-                    ',"deviceName":"device5"' +
-                    ',"deviceId":"5"';
+                BaseData = BaseData + '{"userId":"PNWang@itri.org.tw"';
+                BaseData = BaseData + ',"username":"PNWang"';
             }
-            var randomVarAppName = Math.floor(Math.random() * 3);
-            if (randomVarAppName == 0) {
-                BaseData = BaseData + ',"AppName":"Metal fastener"';
-                BaseData = BaseData + ',"AppId":"1"';
-            } else if (randomVarAppName == 1) {
-                BaseData = BaseData + ',"AppName":"Production Visualization"';
-                BaseData = BaseData + ',"AppId":"2"';
-            } else {
-                BaseData = BaseData + ',"AppName":"Forging"';
-                BaseData = BaseData + ',"AppId":"3"';
+            var randomVarDeviceName = Math.floor(Math.random() * 2);
+            if (randomVarDeviceName == 0) {
+                BaseData = BaseData +
+                    ',"deviceName":"68-0A40571-01"' +
+                    ',"deviceId":"3B42EA4B86CEC7C39A2C051A5DB8371B"';
+            } else if (randomVarDeviceName == 1) {
+                BaseData = BaseData +
+                    ',"deviceName":"DESKTOP-QSLG4F2"' +
+                    ',"deviceId":"E3B3D13ADAB443D64E800CA88B06FC8F"';
+            } else if (randomVarDeviceName == 2) {
+                BaseData = BaseData +
+                    ',"deviceName":"DESKTOP-2N8SNHP"' +
+                    ',"deviceId":"CE28053126F3791B18F4CEB38BB59386"';
             }
-            if (randomVar == 0) {
-                let CountData = BaseData +
-                    ',"Type":"Count"' +
-                    ',"CountName":"APInumber"';
-                var randomVar = Math.floor(Math.random() * 20) + 1;
-                CountData = CountData + ',"Count":"' + randomVar + '"}';
-                publish(topic, CountData, options);
-            } else if (randomVar == 1) {
-                let RecordTimeData = BaseData +
-                    ',"Type":"RecordTime"' +
-                    ',"RecordType":"Start"' +
-                    ',"LongestTime":"600"}';
-                publish(topic, RecordTimeData, options);
-            } else if (randomVar == 2) {
-                let RecordTimeData = BaseData +
-                    ',"Type":"RecordTime"' +
-                    ',"RecordType":"End"' +
-                    ',"LongestTime":"600"}';
-                publish(topic, RecordTimeData, options);
-            } else {
-                let AccumulationTimeData = BaseData +
-                    ',"Type":"AccumulationTime"';
-                var randomVar = Math.floor(Math.random() * 151) + 300;
-                AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
-                publish(topic, AccumulationTimeData, options);
+            var randomVarAppName = Math.floor(Math.random() * 2);
+            let SubscriptionData = "";
+            let CountData = "";
+            let AccumulationTimeData = "";
+            switch (randomVarAppName) {
+                case 0:
+                    BaseData = BaseData + ',"AppName":"Metering API Test Tool"';
+                    BaseData = BaseData + ',"AppId":"meteringapitesttool0000000000001"';
+                    CountData = BaseData + ',"Type":"count"' + ',"CountName":"APInumber"';
+                    var randomVar = Math.floor(Math.random() * 5) + 1;
+                    CountData = CountData + ',"Count":"' + randomVar + '"}';
+                    publish(topic, CountData, options);
+                    break;
+                case 1:
+                    BaseData = BaseData + ',"AppName":"VMX Availability factor Visual website"';
+                    BaseData = BaseData + ',"AppId":"vmxutsystemweb"';
+                    CountData = BaseData + ',"Type":"count"' + ',"CountName":"APInumber"';
+                    var randomVar = Math.floor(Math.random() * 5) + 1;
+                    CountData = CountData + ',"Count":"' + randomVar + '"}';
+                    publish(topic, CountData, options);
+                    break;
+                case 2:
+                    BaseData = BaseData + ',"AppName":"Notepad"';
+                    BaseData = BaseData + ',"AppId":"notepadsampleapp"';
+                    AccumulationTimeData = BaseData +
+                        ',"Type":"time"';
+                    var randomVar = (Math.floor(Math.random() * 5)) * 3600;
+                    AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
+                    publish(topic, AccumulationTimeData, options);
+                    break;
             }
+
+
         } else if (flag == 1) {
             let BaseData = '{"SSOToken":"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJXSVNFLVBhYVNAaWlpLWNmbGFiLmNvbSIsImlhdCI6MTU2NzQwODc3MywiZXhwIjoxNTY3NDEyMzczLCJ1c2VySWQiOiIwYmUyYjU1NC1kN2IyLTQ2NTYtYjEyNy1kMDhkYTlhZmZiZjkiLCJ1YWFJZCI6Ijk5MWIyZWUzLWU5ZjMtNDJlZi05YjJjLTJhMzM4NmM2OWYxZiIsImNyZWF0aW9uVGltZSI6MTU1NDcyOTQ2ODAwMCwibGFzdE1vZGlmaWVkVGltZSI6MTU1NDc3ODgzNTAwMCwidXNlcm5hbWUiOiJlaXBhYXNzc29yb290QGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IlNpZ24gT24iLCJsYXN0TmFtZSI6IlNpbmdsZSIsInJvbGUiOiJhZG1pbiIsImdyb3VwcyI6WyJlaXBhYXNzc29yb290QGdtYWlsLmNvbSJdLCJjZlNjb3BlcyI6W3siZ3VpZCI6bnVsbCwic3NvX3JvbGUiOiJhZG1pbiIsInNwYWNlcyI6W119XSwic2NvcGVzIjpbXSwic3RhdHVzIjoiYWN0aXZlIiwib3JpZ2luIjoiU1NPIiwib3ZlclBhZGRpbmciOmZhbHNlLCJzeXN0ZW0iOmZhbHNlLCJyZWZyZXNoVG9rZW4iOiJiM2ViZDVmZS04ZmY0LTQ5NDktYWQxNy0wMjUwNDMxZDY5ZTgifQ.-v3igxHyb7jFglMHTV9U_Shg3CHmj2oUfq-iAM3sKilyKZj_qToN_IJ1yROirwk-HOp_tmRNiE6bURJzcJcHQQ"' +
                 ',"country":"TW"';
@@ -223,26 +329,20 @@ mqtt.on("connect", function () {
             }
             if (randomVar == 0) {
                 let CountData = BaseData +
-                    ',"Type":"Count"' +
+                    ',"Type":"count"' +
                     ',"CountName":"APInumber"';
                 var randomVar = Math.floor(Math.random() * 20) + 1;
                 CountData = CountData + ',"Count":"' + randomVar + '"}';
                 publish(topic, CountData, options);
             } else if (randomVar == 1) {
-                let RecordTimeData = BaseData +
-                    ',"Type":"RecordTime"' +
-                    ',"RecordType":"Start"' +
-                    ',"LongestTime":"600"}';
-                publish(topic, RecordTimeData, options);
-            } else if (randomVar == 2) {
-                let RecordTimeData = BaseData +
-                    ',"Type":"RecordTime"' +
-                    ',"RecordType":"End"' +
-                    ',"LongestTime":"600"}';
-                publish(topic, RecordTimeData, options);
+                let AccumulationTimeData = BaseData +
+                    ',"Type":"time"';
+                var randomVar = Math.floor(Math.random() * 151) + 300;
+                AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
+                publish(topic, AccumulationTimeData, options);
             } else {
                 let AccumulationTimeData = BaseData +
-                    ',"Type":"AccumulationTime"';
+                    ',"Type":"subscribe"';
                 var randomVar = Math.floor(Math.random() * 151) + 300;
                 AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
                 publish(topic, AccumulationTimeData, options);
