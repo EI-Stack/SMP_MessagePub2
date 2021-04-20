@@ -63,12 +63,12 @@ if (config.service.mqtt.toString() === 'true') {
 		}
 	} else {
 		// config.mqtt.broker	  	  = "http://192.168.50.187";	// MQTT Broker IP
-		config.mqtt.broker = "http://60.251.156.213"; //"http://rabbitmq-001-pub.sa.wise-paas.com";	//"http://wise-msghub.eastasia.cloudapp.azure.com" for 187 MQTT Broker IP "http://124.9.14.79"  for cf-lab and mirdc 
-		config.mqtt.port = 21883;			  							// MQTT Broker Port (Default:1883) 
+		config.mqtt.broker = "http://60.251.156.215"; //"http://rabbitmq-001-pub.sa.wise-paas.com";	//"http://wise-msghub.eastasia.cloudapp.azure.com" for 187 MQTT Broker IP "http://124.9.14.79"  for cf-lab and mirdc 
+		config.mqtt.port = 1883;			  							// MQTT Broker Port (Default:1883) 
 		// config.mqtt.username	  = "user";
 		// config.mqtt.password	  = "good4user";
-		config.mqtt.username = "user";//"8cf044e2-5ed3-11ea-b206-d20b7873c901:7101a5e9-77ac-47bc-93dc-092e24ec4f30";
-		config.mqtt.password = "AQSDgtnTd1";//"AQSDgtnTd1";//"PFKo8vEnXin5wsdttBHEHSHZD";//"dy1KnL1ti5N8Xxr1xPVY";
+		config.mqtt.username = "admin";//"8cf044e2-5ed3-11ea-b206-d20b7873c901:7101a5e9-77ac-47bc-93dc-092e24ec4f30";
+		config.mqtt.password = "good4admin";//"AQSDgtnTd1";//"PFKo8vEnXin5wsdttBHEHSHZD";//"dy1KnL1ti5N8Xxr1xPVY";
 		//                       username for Mirdc MQTT 2e03cf86-ad47-4c29-bf52-160b5a073f2d:d9182d97-2d83-4d38-bd5f-075e95e8d52d
 		//                       password for Mirdc MQTT sukfFUFEgTAXkfW5Ci50Rtocr
 		//             III測試用, username for iii cf lab 3f3de3b6-493a-4e5a-a956-015c81aeaaa2:22116534-b4e5-4c97-86f6-34b74728759a

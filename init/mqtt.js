@@ -117,7 +117,7 @@ mqtt.on("connect", function () {
     let options = {
         qos: 0
     };
-    let duration = 2000;
+    let duration = 60000;
     let timer_id = setInterval(function () {
 
         var randomVar = Math.floor(Math.random() * 5);
@@ -257,7 +257,7 @@ mqtt.on("connect", function () {
 
             //#################################################
             let BaseData = "";
-            var randomVarUsername = Math.floor(Math.random() * 2);
+            var randomVarUsername = Math.floor(Math.random() * 3);
             if (randomVarUsername == 0) {
                 BaseData = BaseData + '{"userId":"imtc.d300@hotmail.com"';
                 BaseData = BaseData + ',"username":"imtc.d300"';
@@ -268,7 +268,7 @@ mqtt.on("connect", function () {
                 BaseData = BaseData + '{"userId":"PNWang@itri.org.tw"';
                 BaseData = BaseData + ',"username":"PNWang"';
             }
-            var randomVarDeviceName = Math.floor(Math.random() * 2);
+            var randomVarDeviceName = Math.floor(Math.random() * 3);
             if (randomVarDeviceName == 0) {
                 BaseData = BaseData +
                     ',"deviceName":"68-0A40571-01"' +
@@ -282,7 +282,7 @@ mqtt.on("connect", function () {
                     ',"deviceName":"DESKTOP-2N8SNHP"' +
                     ',"deviceId":"CE28053126F3791B18F4CEB38BB59386"';
             }
-            var randomVarAppName = Math.floor(Math.random() * 2);
+            var randomVarAppName = Math.floor(Math.random() * 3);
             let SubscriptionData = "";
             let CountData = "";
             let AccumulationTimeData = "";
@@ -308,7 +308,7 @@ mqtt.on("connect", function () {
                     BaseData = BaseData + ',"AppId":"notepadsampleapp"';
                     AccumulationTimeData = BaseData +
                         ',"Type":"time"';
-                    var randomVar = (Math.floor(Math.random() * 5)) * 3600;
+                    var randomVar = (Math.floor(Math.random() * 5) + 1) * 3600;
                     AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
                     publish(topic, AccumulationTimeData, options);
                     break;
