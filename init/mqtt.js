@@ -17,8 +17,6 @@ mqttsub.on("connect", function () {
     //     // if (!err) {
     //     //     console.log(granted[0].topic, granted[0].qos);
     //     // }
-
-
     // });
 });
 mqttsub.on("message", function (topic, msg) {
@@ -117,7 +115,7 @@ mqtt.on("connect", function () {
     let options = {
         qos: 0
     };
-    let duration = 60000;
+    let duration = 1000;
     let timer_id = setInterval(function () {
 
         var randomVar = Math.floor(Math.random() * 5);
@@ -257,33 +255,43 @@ mqtt.on("connect", function () {
 
             //#################################################
             let BaseData = "";
-            var randomVarUsername = Math.floor(Math.random() * 3);
+            var randomVarUsername = Math.floor(Math.random() * 5);
             if (randomVarUsername == 0) {
                 BaseData = BaseData + '{"userId":"imtc.d300@hotmail.com"';
-                BaseData = BaseData + ',"username":"imtc.d300"';
             } else if (randomVarUsername == 1) {
                 BaseData = BaseData + '{"userId":"cathy.chen@itri.org.tw"';
-                BaseData = BaseData + ',"username":"Cathy"';
             } else if (randomVarUsername == 2) {
                 BaseData = BaseData + '{"userId":"PNWang@itri.org.tw"';
-                BaseData = BaseData + ',"username":"PNWang"';
+            } else if (randomVarUsername == 3) {
+                BaseData = BaseData + '{"userId":"hu@itri.org.tw"';
+            } else if (randomVarUsername == 4) {
+                BaseData = BaseData + '{"userId":"paul@itri.org.tw"';
             }
-            var randomVarDeviceName = Math.floor(Math.random() * 3);
+            var randomVarDeviceName = Math.floor(Math.random() * 5);
             if (randomVarDeviceName == 0) {
                 BaseData = BaseData +
-                    ',"deviceName":"68-0A40571-01"' +
+
                     ',"deviceId":"3B42EA4B86CEC7C39A2C051A5DB8371B"';
             } else if (randomVarDeviceName == 1) {
                 BaseData = BaseData +
-                    ',"deviceName":"DESKTOP-QSLG4F2"' +
+
                     ',"deviceId":"E3B3D13ADAB443D64E800CA88B06FC8F"';
             } else if (randomVarDeviceName == 2) {
                 BaseData = BaseData +
-                    ',"deviceName":"DESKTOP-2N8SNHP"' +
+
                     ',"deviceId":"CE28053126F3791B18F4CEB38BB59386"';
+            } else if (randomVarDeviceName == 3) {
+                BaseData = BaseData +
+
+                    ',"deviceId":"ASQWFS53126F3791B18F4CEB38BB59386"';
+            } else if (randomVarDeviceName == 4) {
+                BaseData = BaseData +
+
+                    ',"deviceId":"ABCDEFGHIJKLMNOPQR"';
             }
-            var randomVarAppName = Math.floor(Math.random() * 3);
+            var randomVarAppName = Math.floor(Math.random() * 5);
             let SubscriptionData = "";
+            let BuyoutData = "";
             let CountData = "";
             let AccumulationTimeData = "";
             switch (randomVarAppName) {
@@ -293,6 +301,11 @@ mqtt.on("connect", function () {
                     CountData = BaseData + ',"Type":"count"' + ',"CountName":"APInumber"';
                     var randomVar = Math.floor(Math.random() * 5) + 1;
                     CountData = CountData + ',"Count":"' + randomVar + '"}';
+                    console.log("randomVarUsername: " + randomVarUsername);
+                    console.log("randomVarDeviceName: " + randomVarDeviceName);
+                    console.log("randomVarAppName: " + randomVarAppName);
+                    console.log("type: count");
+                    console.log("CountData: " + CountData);
                     publish(topic, CountData, options);
                     break;
                 case 1:
@@ -301,6 +314,11 @@ mqtt.on("connect", function () {
                     CountData = BaseData + ',"Type":"count"' + ',"CountName":"APInumber"';
                     var randomVar = Math.floor(Math.random() * 5) + 1;
                     CountData = CountData + ',"Count":"' + randomVar + '"}';
+                    console.log("randomVarUsername: " + randomVarUsername);
+                    console.log("randomVarDeviceName: " + randomVarDeviceName);
+                    console.log("randomVarAppName: " + randomVarAppName);
+                    console.log("type: count");
+                    console.log("CountData: " + CountData);
                     publish(topic, CountData, options);
                     break;
                 case 2:
@@ -310,7 +328,41 @@ mqtt.on("connect", function () {
                         ',"Type":"time"';
                     var randomVar = (Math.floor(Math.random() * 5) + 1) * 3600;
                     AccumulationTimeData = AccumulationTimeData + ',"Time":"' + randomVar + '"}';
+                    console.log("randomVarUsername: " + randomVarUsername);
+                    console.log("randomVarDeviceName: " + randomVarDeviceName);
+                    console.log("randomVarAppName: " + randomVarAppName);
+                    console.log("type: time");
+                    console.log("AccumulationTimeData: " + AccumulationTimeData);
                     publish(topic, AccumulationTimeData, options);
+                    break;
+                case 3:
+                    BaseData = BaseData + ',"AppName":"ADS"';
+                    BaseData = BaseData + ',"AppId":"c20ad4d76fe97759aa27a0c99bff6710"';
+                    SubscriptionData = BaseData + ',"Type":"subscription"';
+                    var randomYear = Math.floor(Math.random() * 4) + 2019;
+                    var randomMonth = Math.floor(Math.random() * 12) + 1;
+                    SubscriptionData = SubscriptionData + ',"year":"' + randomYear + '"';
+                    SubscriptionData = SubscriptionData + ',"month":"' + randomMonth + '"}';
+                    console.log("randomVarUsername: " + randomVarUsername);
+                    console.log("randomVarDeviceName: " + randomVarDeviceName);
+                    console.log("randomVarAppName: " + randomVarAppName);
+                    console.log("type: subscription");
+                    console.log("SubscriptionData: " + SubscriptionData);
+                    publish(topic, SubscriptionData, options);
+                    break;
+                case 4:
+                    BaseData = BaseData + ',"AppName":"OPCUA"';
+                    BaseData = BaseData + ',"AppId":"6512bd43d9caa6e02c990b0a82652dca"';
+                    BuyoutData = BaseData + ',"Type":"buyout"}';
+                    console.log("randomVarUsername: " + randomVarUsername);
+                    console.log("randomVarDeviceName: " + randomVarDeviceName);
+                    console.log("randomVarAppName: " + randomVarAppName);
+                    console.log("type: buyout");
+                    if (randomVarDeviceName == 1 && randomVarUsername == 0) {
+                        console.log("appId,userId and deviceId are authorized")
+                    }
+                    console.log("BuyoutData: " + BuyoutData);
+                    publish(topic, BuyoutData, options);
                     break;
             }
 
